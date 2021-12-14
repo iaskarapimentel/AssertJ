@@ -2,12 +2,14 @@ package test.java;
 
 import main.java.Person;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.Assert.*;
 
 class PersonTest {
 
@@ -15,24 +17,35 @@ class PersonTest {
     @DisplayName("Task 1: Verify person details")
     public void verifyPersonDetails_task_1() {
         Person person = new Person("Albert", "Einstein", 25, List.of("Berlin"), false);
-
-       // TODO
+        assertThat(person.getFirstName()).isEqualTo("Albert");
+        assertThat(person.getLastName()).isEqualTo("Einstein");
+        assertThat(person.getAge()).isEqualTo(25);
+        assertThat(person.isMarried()).isEqualTo(false);
+        assertThat(person.getLastName()).isNotEqualTo("Tommy");
     }
 
     @Test
     @DisplayName("Task 2: Verify person details")
     public void verifyPersonDetails_task_2() {
-        Person person = new Person("Albert", "Einstein", 25, List.of("Berlin"), true);
-
-       // TODO
+        Person person = new Person("Albert", null, 25, List.of("Berlin"), true);
+        assertThat(person.getFirstName()).isNotEmpty().isEqualTo("Albert");
+        assertThat(person.getLastName()).isNull();
+        assertThat(person.getAge()).isEqualTo(25);
+        assertThat(person.isMarried()).isEqualTo(true);
+        assertThat(person.getLastName()).isNotEqualTo("Tommy");
     }
 
     @Test
     @DisplayName("Task 3: Verify person details")
     public void verifyPersonDetails_task_3() {
         Person person = new Person("Albert", "Einstein", 25, List.of("Berlin"), true);
-
-       // TODO
+        assertThat(person.getFirstName()).startsWith("A");
+        assertThat(person.getLastName()).doesNotStartWith("T");
+        assertThat(person.getFirstName()).contains("ber");
+        assertThat(person.getLastName()).endsWith("n");
+        assertThat(person.getAge()).isEqualTo(25);
+        assertThat(person.getFirstName()).hasSize(6);
+//        assertThat(person.getLastName()).LessThan(9);
     }
 
     @Test
@@ -41,8 +54,7 @@ class PersonTest {
         Person person1 = new Person("Albert", "Einstein", 25, List.of("Berlin"), true);
         Person person2 = new Person("Albert", "Einstein", 25, List.of("Berlin"), true);
 
-
-        // TODO
+        assertThat(person1).isEqualTo(person2);
     }
 
     @Test
@@ -51,7 +63,8 @@ class PersonTest {
         Person person1 = new Person("Albert", "Einstein", 25, List.of("Berlin"), true);
         Person person2 = new Person("Lala", "Berlin", 25, List.of("Munich"), false);
 
-       // TODO
+        assertThat(person1).isEqualTo(person2);
+        assertThat(person1).isNotEqualTo(person2);
 
     }
 
@@ -63,7 +76,9 @@ class PersonTest {
 
         List<String> actualCitiesVisited = person.getCitiesVisited();
 
-        // TODO
+        assertThat(actualCitiesVisited).isNotEmpty();
+        assertThat(actualCitiesVisited).contains("Frankfurt");
+        assertThat(actualCitiesVisited).doesNotContain("Brazil");
     }
 
     @Test
@@ -72,7 +87,8 @@ class PersonTest {
         List<String> citiesVisited = List.of("Berlin", "Munich", "Hamburg", "Frankfurt");
         Person person = new Person("Albert", "Einstein", 25, citiesVisited, true);
 
-        // TODO
+//        assertThat(person.getFirstName()).not(.throws(new IllegalArgumentException))
+//        assertThat(person.setFirstName(null))throws(new IllegalArgumentException)
     }
 
     @Test
